@@ -21,6 +21,11 @@ public class ExceptionHandlerClass extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(new ExceptionResponse(HttpStatus.FORBIDDEN.value(), exception.getMessage()), HttpStatus.FORBIDDEN);
     }
 
+    @ExceptionHandler(ArgumentErrorException.class)
+    public ResponseEntity<ExceptionResponse> errorException(ArgumentErrorException exception, WebRequest webRequest){
+        return new ResponseEntity<>(new ExceptionResponse(HttpStatus.FORBIDDEN.value(), exception.getMessage()), HttpStatus.FORBIDDEN);
+    }
+
     @ExceptionHandler(GeneralErreurException.class)
     public ResponseEntity<ExceptionResponse> errorException(GeneralErreurException exception, WebRequest webRequest){
         return new ResponseEntity<>(new ExceptionResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), exception.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);

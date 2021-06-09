@@ -1,7 +1,9 @@
-package m2.miage.m2gestioncours;
+package m2.miage.m2gestioncours.Enum;
 
 public enum SequenceEnum {
-    COURS_SEQUENCE("cours_sequence");
+    COURS_SEQUENCE("cours_sequence"),
+    PISCINE_SEQUENCE("piscine_sequence")
+    ;
 
     private final String value;
     SequenceEnum(String value) {

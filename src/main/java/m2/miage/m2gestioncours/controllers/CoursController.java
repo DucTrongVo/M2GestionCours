@@ -9,10 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -35,9 +32,10 @@ public class CoursController {
     }
 
     @PostMapping(value = "/creerCours")
-    private ResponseEntity<Cours> creerCours(@RequestBody Cours cours) throws GeneralErreurException {
+    private ResponseEntity<Cours> creerCours(@RequestBody Cours cours, @RequestParam boolean isEnseignant,
+                                             @RequestParam boolean enseignantApte, @RequestParam int niveauExpEnseignant) throws GeneralErreurException {
         try{
-            return new ResponseEntity<>(coursService.creerCours(cours), HttpStatus.CREATED);
+            return new ResponseEntity<>(coursService.creerCours(cours, isEnseignant, enseignantApte, niveauExpEnseignant), HttpStatus.CREATED);
         } catch (Exception e){
             logger.error("Une erreur est survenue : ",e);
             throw new GeneralErreurException();
