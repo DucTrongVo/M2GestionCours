@@ -12,9 +12,11 @@ public interface ICoursService {
 //    @Transactional
 //    Cours creerCours(Cours cours);
     @Transactional
-    Cours creerCours(Cours cours, boolean isEnseignant, boolean enseignatnApt, int niveauExpEnseignant);
+    Cours creerCours(Cours cours, boolean isEnseignant, boolean enseignatnApt, int niveauExpEnseignant) throws ForbiddenException;
 
     List<Cours> getListAllCours();
+
+    Cours getCoursById(int idCours) throws NotFoundException;
 
     @Transactional
     Cours inscrit(int idCours, int idEtudiant, int niveauEtudiant, boolean isEtudiant) throws NotFoundException, ForbiddenException;

@@ -8,7 +8,7 @@ import java.time.temporal.ChronoUnit;
 
 @Service
 public class ToolServiceImpl implements IToolService{
-    DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss");
+    DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
 
     @Override

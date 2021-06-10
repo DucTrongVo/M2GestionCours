@@ -12,7 +12,7 @@ import java.io.Serializable;
 import java.util.List;
 
 @SuperBuilder
-@Document(collation = "cours")
+@Document(collection = "cours")
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
@@ -33,7 +33,6 @@ public class Cours implements Serializable {
     private int niveauCible;
 
     @Field("dateDebut")
-    //@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss", timezone = "UTC")
     private String dateDebut;
 
     @Field("idEnseignant")

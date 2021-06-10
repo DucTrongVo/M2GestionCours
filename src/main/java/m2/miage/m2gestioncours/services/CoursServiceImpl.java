@@ -34,8 +34,12 @@ public class CoursServiceImpl implements ICoursService{
     IToolService toolService;
 
     @Override
-    public Cours creerCours(Cours cours, boolean isEnseignant, boolean enseignatnApte, int niveauExpEnseignant) {
+    public Cours creerCours(Cours cours, boolean isEnseignant, boolean enseignantApte, int niveauExpEnseignant) throws ForbiddenException {
         LocalDateTime currentTime = LocalDateTime.now();
+        if (cours.getDateDebut() == null){
+            logger.error("Date de début est obligatoire!");
+            throw new ForbiddenException("Date de début est obligatoire!");
+        }
         // verifier date de début
         if (toolService.getDateDifferent(currentTime, toolService.getDateTimeFromString(cours.getDateDebut())) < 7){
             logger.error("La date d’un cours doit toujours être supérieure de 7 jours calendaires par rapport à la date de saisie!");
@@ -51,7 +55,7 @@ public class CoursServiceImpl implements ICoursService{
             logger.error(err);
             throw new ArgumentErrorException(err);
         }
-        if (!enseignatnApte){
+        if (!enseignantApte){
             String err = "L'enseignant' d'id "+cours.getIdEnseignant()+" est NON APTE";
             logger.error(err);
             throw new ArgumentErrorException(err);
@@ -72,6 +76,11 @@ public class CoursServiceImpl implements ICoursService{
     @Override
     public List<Cours> getListAllCours() {
         return coursRepository.findAll();
+    }
+
+    @Override
+    public Cours getCoursById(int idCours) throws NotFoundException {
+        return verifyAndGetCours(idCours);
     }
 
     @Override
