@@ -3,6 +3,7 @@ package m2.miage.m2gestioncours.services;
 import m2.miage.m2gestioncours.Enum.SequenceEnum;
 import m2.miage.m2gestioncours.controllers.CoursController;
 import m2.miage.m2gestioncours.entities.Cours;
+import m2.miage.m2gestioncours.entities.dto.Statistique;
 import m2.miage.m2gestioncours.exception.ArgumentErrorException;
 import m2.miage.m2gestioncours.exception.ForbiddenException;
 import m2.miage.m2gestioncours.exception.NotFoundException;
@@ -134,6 +135,11 @@ public class CoursServiceImpl implements ICoursService{
         listEtudiant.remove(idEtudiant);
         cours.setIdEtudiants(listEtudiant);
         return coursRepository.save(cours);
+    }
+
+    @Override
+    public Statistique getStat() {
+        return new Statistique(coursRepository.findAll().size());
     }
 
     Cours verifyAndGetCours(int idCours) throws NotFoundException {

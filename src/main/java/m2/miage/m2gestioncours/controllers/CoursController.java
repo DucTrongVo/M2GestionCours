@@ -1,6 +1,7 @@
 package m2.miage.m2gestioncours.controllers;
 
 import m2.miage.m2gestioncours.entities.Cours;
+import m2.miage.m2gestioncours.entities.dto.Statistique;
 import m2.miage.m2gestioncours.exception.ArgumentErrorException;
 import m2.miage.m2gestioncours.exception.ForbiddenException;
 import m2.miage.m2gestioncours.exception.GeneralErreurException;
@@ -67,6 +68,16 @@ public class CoursController {
             throw new ForbiddenException(e.getMessage());
         } catch (NotFoundException e) {
             throw new NotFoundException(e.getMessage());
+        } catch (Exception e){
+            logger.error("Une erreur est survenue : ",e);
+            throw new GeneralErreurException();
+        }
+    }
+
+    @GetMapping(value = "/stat")
+    private ResponseEntity<Statistique> getStat() throws GeneralErreurException {
+        try {
+            return ResponseEntity.ok(coursService.getStat());
         } catch (Exception e){
             logger.error("Une erreur est survenue : ",e);
             throw new GeneralErreurException();

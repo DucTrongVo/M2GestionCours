@@ -1,6 +1,7 @@
 package m2.miage.m2gestioncours.services;
 
 import m2.miage.m2gestioncours.entities.Cours;
+import m2.miage.m2gestioncours.entities.dto.Statistique;
 import m2.miage.m2gestioncours.exception.ForbiddenException;
 import m2.miage.m2gestioncours.exception.NotFoundException;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,4 +24,6 @@ public interface ICoursService {
 
     @Transactional
     Cours desinscrit(int idCours, int idEtudiant) throws NotFoundException, ForbiddenException;
+
+    Statistique getStat();
 }
