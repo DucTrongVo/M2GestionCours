@@ -74,6 +74,20 @@ public class CoursController {
         }
     }
 
+    @PostMapping(value = "/desinscrit/{idCours}")
+    private ResponseEntity<Cours> desinscrit(@PathVariable("idCours") int idCours, @RequestParam int idEtudiant) throws ForbiddenException, NotFoundException, GeneralErreurException {
+        try {
+            return ResponseEntity.ok(coursService.desinscrit(idCours, idEtudiant));
+        } catch (ForbiddenException e) {
+            throw new ForbiddenException(e.getMessage());
+        } catch (NotFoundException e) {
+            throw new NotFoundException(e.getMessage());
+        } catch (Exception e){
+            logger.error("Une erreur est survenue : ",e);
+            throw new GeneralErreurException();
+        }
+    }
+
     @GetMapping(value = "/stat")
     private ResponseEntity<Statistique> getStat() throws GeneralErreurException {
         try {

@@ -132,7 +132,7 @@ public class CoursServiceImpl implements ICoursService{
             logger.error(err);
             throw new ArgumentErrorException(err);
         }
-        listEtudiant.remove(idEtudiant);
+        listEtudiant.remove(Integer.valueOf(idEtudiant));
         cours.setIdEtudiants(listEtudiant);
         return coursRepository.save(cours);
     }
